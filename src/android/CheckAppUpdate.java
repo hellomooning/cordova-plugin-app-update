@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -25,7 +26,8 @@ public class CheckAppUpdate extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("checkAppUpdate")) {
             getUpdateManager().options(args, callbackContext);
-            if (verifyInstallPermission() && verifyOtherPermissions())
+            if (verifyOtherPermissions())
+//                if (verifyInstallPermission() && verifyOtherPermissions())
                 getUpdateManager().checkUpdate();
             return true;
         }
@@ -140,6 +142,7 @@ public class CheckAppUpdate extends CordovaPlugin {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                     getUpdateManager().permissionDenied("Permission Denied: " + permissions[i]);
+                    Toast.makeText(cordova.getActivity(), "权限授权失败，自动更新功能不可用", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }

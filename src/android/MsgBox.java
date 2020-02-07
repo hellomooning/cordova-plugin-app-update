@@ -41,11 +41,12 @@ public class MsgBox {
         if (noticeDialog == null) {
             LOG.d(TAG, "showNoticeDialog");
             // 构造对话框
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATE_TITLE));
             builder.setMessage(msgHelper.getString(MsgHelper.UPDATE_MESSAGE));
             // 更新
             builder.setPositiveButton(msgHelper.getString(MsgHelper.UPDATE_UPDATE_BTN), onClickListener);
+            builder.setNegativeButton(msgHelper.getString("update_cancel"), null);
             noticeDialog = builder.create();
         }
 
@@ -67,7 +68,7 @@ public class MsgBox {
             LOG.d(TAG, "showDownloadDialog");
 
             // 构造软件下载对话框
-            AlertDialog.Builder builder = new Builder(mContext);
+            AlertDialog.Builder builder = new Builder(mContext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATING));
             // 给下载对话框增加进度条
             final LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -110,7 +111,7 @@ public class MsgBox {
         if (this.errorDialog == null) {
             LOG.d(TAG, "initErrorDialog");
             // 构造对话框
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATE_ERROR_TITLE));
             builder.setMessage(msgHelper.getString(MsgHelper.UPDATE_ERROR_MESSAGE));
             // 更新
